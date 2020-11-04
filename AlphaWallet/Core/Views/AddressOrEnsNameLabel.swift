@@ -103,7 +103,7 @@ class AddressOrEnsNameLabel: UILabel {
 
     func resolve(_ value: String, completion: @escaping ((AddressOrEnsResolution) -> Void)) {
         clear()
-        
+
         if let address = AlphaWallet.Address(string: value) {
             inResolvingState = true
             ENSReverseLookupCoordinator(server: serverToResolveEns).getENSNameFromResolver(forAddress: address) { [weak self] result in
@@ -118,16 +118,12 @@ class AddressOrEnsNameLabel: UILabel {
             }
         } else if value.contains(".") {
             inResolvingState = true
-
-            GetENSAddressCoordinator(server: serverToResolveEns).getENSAddressFromResolver(for: value) { [weak self] result in
-                guard let strongSelf = self else { return }
-                strongSelf.inResolvingState = false
-
-                if let address = result.value, CryptoAddressValidator.isValidAddress(address.address) {
-                    completion(.resolved(.address(AlphaWallet.Address(address: address))))
-                } else {
-                    completion(.resolved(.none))
-                }
+            DomainResolver(server: serverToResolveEns).resolveAddress(value).done { address in
+                completion(.resolved(.address(address)))
+            }.catch { _ in
+                completion(.resolved(.none))
+            }.finally {
+                self.inResolvingState = false
             }
         } else {
             completion(.invalidInput)

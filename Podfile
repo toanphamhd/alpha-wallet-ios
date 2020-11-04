@@ -4,7 +4,7 @@ source 'https://cdn.cocoapods.org/'
 
 target 'AlphaWallet' do
   use_frameworks!
-  pod 'BigInt', '~> 3.0'
+  pod 'BigInt', '~> 3.1'
   pod 'R.swift'
   pod 'JSONRPCKit', '~> 2.0.0'
   pod 'APIKit'
@@ -19,14 +19,14 @@ target 'AlphaWallet' do
   pod 'RealmSwift', '~> 5.4.0'
   pod 'Moya', '~> 10.0.1'
   pod 'JavaScriptKit'
-  pod 'CryptoSwift'
+  pod 'CryptoSwift', '~> 1.0'
   pod 'SwiftyXMLParser', :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
   pod 'Kingfisher'
   pod 'AlphaWalletWeb3Provider', :git=>'https://github.com/AlphaWallet/AlphaWallet-web3-provider', :commit => '1c1aafb566361e7067e69f6e38b0fdc30b801429'
   pod 'TrezorCrypto', :git=>'https://github.com/AlphaWallet/trezor-crypto-ios.git', :commit => '50c16ba5527e269bbc838e80aee5bac0fe304cc7'
-  pod 'TrustKeystore', :git => 'https://github.com/alpha-wallet/trust-keystore.git', :commit => '37f7eaf9531cb4e33d06129543b3a56972f59d2a'
+  pod 'TrustKeystore', :git => 'https://github.com/vladyslav-iosdev/latest-keystore-snapshot.git', :commit => 'c0bdc4f6ffc117b103e19d17b83109d4f5a0e764'
   pod 'SwiftyJSON'
-  pod 'web3swift', :git => 'https://github.com/alpha-wallet/web3swift.git', :commit => 'd863662b08f112dee48538a04ab704244e9c7bae'
+  pod 'web3swift', :git => 'https://github.com/vladyslav-iosdev/web3swift.git', :commit => '448f5350aa2276d2ec24e466937dd9f849828013'
   pod 'SAMKeychain'
   pod 'PromiseKit/CorePromise'
   pod 'PromiseKit/Alamofire'
@@ -37,6 +37,7 @@ target 'AlphaWallet' do
   pod 'TrustWalletCore'
   pod 'AWSSNS'
   pod 'Mixpanel-swift'
+  pod 'UnstoppableDomainsResolution', :git=>'https://github.com/vladyslav-iosdev/resolution-swift.git', :branch=>'alphawallet'
   # pod 'AWSCognito'
   target 'AlphaWalletTests' do
       inherit! :search_paths

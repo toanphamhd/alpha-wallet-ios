@@ -7,9 +7,17 @@ PODS:
   - AWSCore (2.6.28)
   - AWSSNS (2.6.28):
     - AWSCore (= 2.6.28)
-  - BigInt (3.0.1):
+  - Base58Swift (2.1.7):
+    - BigInt (~> 3.1)
+  - BigInt (3.1.0):
     - SipHash (~> 1.2)
-  - CryptoSwift (0.10.0)
+  - CryptoSwift (1.3.2)
+  - EthereumABI (1.3.0):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 1.0)
+    - EthereumAddress (~> 1.3)
+  - EthereumAddress (1.3.0):
+    - CryptoSwift (~> 1.0)
   - Eureka (5.2.1)
   - iOSSnapshotTestCase (3.0.0):
     - iOSSnapshotTestCase/SwiftSupport (= 3.0.0)
@@ -62,7 +70,7 @@ PODS:
   - SAMKeychain (1.5.3)
   - secp256k1_ios (0.1.3)
   - SeedStackViewController (0.5.1)
-  - SipHash (1.2.0)
+  - SipHash (1.2.2)
   - StatefulViewController (3.0)
   - SwiftLint (0.25.1)
   - SwiftProtobuf (1.3.1)
@@ -71,16 +79,19 @@ PODS:
   - SWXMLHash (5.0.1)
   - TrezorCrypto (0.0.9)
   - TrustKeystore (0.1.3):
-    - CryptoSwift (~> 0.10.0)
+    - CryptoSwift (~> 1.0)
     - secp256k1_ios (~> 0.1.0)
     - TrezorCrypto
   - TrustWalletCore (0.5.0):
     - SwiftProtobuf (~> 1.3.0)
+  - UnstoppableDomainsResolution (0.1.5):
+    - Base58Swift
+    - EthereumABI
   - web3swift (0.9.0):
     - Alamofire (~> 4.7)
     - Alamofire-Synchronous (~> 4.0)
-    - BigInt (~> 3.0.1)
-    - CryptoSwift (~> 0.10.0)
+    - BigInt (~> 3.0)
+    - CryptoSwift (~> 1.0)
     - libsodium (~> 1.0.12)
     - PromiseKit (~> 6.3.0)
     - Result (~> 3.1)
@@ -90,8 +101,8 @@ DEPENDENCIES:
   - AlphaWalletWeb3Provider (from `https://github.com/AlphaWallet/AlphaWallet-web3-provider`, commit `1c1aafb566361e7067e69f6e38b0fdc30b801429`)
   - APIKit
   - AWSSNS
-  - BigInt (~> 3.0)
-  - CryptoSwift
+  - BigInt (~> 3.1)
+  - CryptoSwift (~> 1.0)
   - Eureka (~> 5.2.1)
   - iOSSnapshotTestCase
   - JavaScriptKit
@@ -116,9 +127,10 @@ DEPENDENCIES:
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
   - SWXMLHash (~> 5.0.0)
   - TrezorCrypto (from `https://github.com/AlphaWallet/trezor-crypto-ios.git`, commit `50c16ba5527e269bbc838e80aee5bac0fe304cc7`)
-  - TrustKeystore (from `https://github.com/alpha-wallet/trust-keystore.git`, commit `37f7eaf9531cb4e33d06129543b3a56972f59d2a`)
+  - TrustKeystore (from `https://github.com/vladyslav-iosdev/latest-keystore-snapshot.git`, commit `c0bdc4f6ffc117b103e19d17b83109d4f5a0e764`)
   - TrustWalletCore
-  - web3swift (from `https://github.com/alpha-wallet/web3swift.git`, commit `d863662b08f112dee48538a04ab704244e9c7bae`)
+  - UnstoppableDomainsResolution (from `https://github.com/vladyslav-iosdev/resolution-swift.git`, branch `alphawallet`)
+  - web3swift (from `https://github.com/vladyslav-iosdev/web3swift.git`, commit `448f5350aa2276d2ec24e466937dd9f849828013`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -126,8 +138,6 @@ SPEC REPOS:
     - APIKit
     - AWSCore
     - AWSSNS
-    - BigInt
-    - CryptoSwift
     - iOSSnapshotTestCase
     - JavaScriptKit
     - JSONRPCKit
@@ -139,9 +149,7 @@ SPEC REPOS:
     - R.swift.Library
     - Result
     - SAMKeychain
-    - secp256k1_ios
     - SeedStackViewController
-    - SipHash
     - StatefulViewController
     - SwiftLint
     - SwiftProtobuf
@@ -150,11 +158,18 @@ SPEC REPOS:
     - TrustWalletCore
   trunk:
     - Alamofire-Synchronous
+    - Base58Swift
+    - BigInt
+    - CryptoSwift
+    - EthereumABI
+    - EthereumAddress
     - Eureka
     - libsodium
     - Mixpanel-swift
     - Realm
     - RealmSwift
+    - secp256k1_ios
+    - SipHash
 
 EXTERNAL SOURCES:
   AlphaWalletWeb3Provider:
@@ -178,11 +193,14 @@ EXTERNAL SOURCES:
     :commit: 50c16ba5527e269bbc838e80aee5bac0fe304cc7
     :git: https://github.com/AlphaWallet/trezor-crypto-ios.git
   TrustKeystore:
-    :commit: 37f7eaf9531cb4e33d06129543b3a56972f59d2a
-    :git: https://github.com/alpha-wallet/trust-keystore.git
+    :commit: c0bdc4f6ffc117b103e19d17b83109d4f5a0e764
+    :git: https://github.com/vladyslav-iosdev/latest-keystore-snapshot.git
+  UnstoppableDomainsResolution:
+    :branch: alphawallet
+    :git: https://github.com/vladyslav-iosdev/resolution-swift.git
   web3swift:
-    :commit: d863662b08f112dee48538a04ab704244e9c7bae
-    :git: https://github.com/alpha-wallet/web3swift.git
+    :commit: 448f5350aa2276d2ec24e466937dd9f849828013
+    :git: https://github.com/vladyslav-iosdev/web3swift.git
 
 CHECKOUT OPTIONS:
   AlphaWalletWeb3Provider:
@@ -207,11 +225,14 @@ CHECKOUT OPTIONS:
     :commit: 50c16ba5527e269bbc838e80aee5bac0fe304cc7
     :git: https://github.com/AlphaWallet/trezor-crypto-ios.git
   TrustKeystore:
-    :commit: 37f7eaf9531cb4e33d06129543b3a56972f59d2a
-    :git: https://github.com/alpha-wallet/trust-keystore.git
+    :commit: c0bdc4f6ffc117b103e19d17b83109d4f5a0e764
+    :git: https://github.com/vladyslav-iosdev/latest-keystore-snapshot.git
+  UnstoppableDomainsResolution:
+    :commit: 48aaf7b53631fa575930fe5dfac124a62343a992
+    :git: https://github.com/vladyslav-iosdev/resolution-swift.git
   web3swift:
-    :commit: d863662b08f112dee48538a04ab704244e9c7bae
-    :git: https://github.com/alpha-wallet/web3swift.git
+    :commit: 448f5350aa2276d2ec24e466937dd9f849828013
+    :git: https://github.com/vladyslav-iosdev/web3swift.git
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -220,8 +241,11 @@ SPEC CHECKSUMS:
   APIKit: 9e1a4069608bf0ae5238811e6cfc26928ad4d01e
   AWSCore: f75fcf5b2f4325da49ae1f7cb5484778d3b0acc6
   AWSSNS: a67710a80c8d380e34248b16e503e0719f02a28d
-  BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
-  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  Base58Swift: 149c9dd95d8712f00e4695b36baafb3031927256
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  CryptoSwift: 093499be1a94b0cae36e6c26b70870668cb56060
+  EthereumABI: c021720744d260b87def6aa45d94554d260cb5a9
+  EthereumAddress: 39fe8e11cf04e4e9902b55ae653dbc4e0aee5f30
   Eureka: c883105488e05bc65539f583246ecf9657cabbfe
   iOSSnapshotTestCase: 23984ffe05289728d646cbb6a7a10b4fb1c93440
   JavaScriptKit: 9ff565209e6efe21bcb9c6d6ca3e863a67a8ecf7
@@ -244,7 +268,7 @@ SPEC CHECKSUMS:
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SeedStackViewController: 4d37c51ec4b0a47daf563ce8f692fde2b703955b
-  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   SwiftProtobuf: 84cd6b8f4fd2fc3d9fbd80a0aaf2e957d52824ec
@@ -252,10 +276,11 @@ SPEC CHECKSUMS:
   SwiftyXMLParser: b5a79fb8a730903703d0a92d30752a0b05158967
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
-  TrustKeystore: 26efa8079f6451d02ce64b906d3ff240fd71d7ca
+  TrustKeystore: 3d8b4571c66648fb985015c96b3185440bb837fe
   TrustWalletCore: dd8c81d5958f1eb737abea1e14675efcc6a104aa
-  web3swift: 1597d4997976d21325882db4c523f1dfd5459406
+  UnstoppableDomainsResolution: 3bfa1719c474337cc588e35d74126d3c1404ce65
+  web3swift: 06118d4c4edc801444aaa995bbbddeda176b97ef
 
-PODFILE CHECKSUM: 0316d0f99f78f33ba3a5a3805c877a60cb4d9975
+PODFILE CHECKSUM: 1eba42d77e5058fe67b8b09d85273c4f57f4d781
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0

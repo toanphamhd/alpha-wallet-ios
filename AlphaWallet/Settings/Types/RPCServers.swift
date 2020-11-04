@@ -246,6 +246,19 @@ enum RPCServer: Hashable, CaseIterable {
         }
     }
 
+    var web3NetworkName: String {
+        switch self {
+        case .main: return "mainnet"
+        case .kovan: return "kovan"
+        case .ropsten: return "ropsten"
+        case .rinkeby: return "rinkeby"
+        case .poa, .sokol, .classic, .callisto, .xDai, .goerli, .artis_sigma1, .artis_tau1, .binance_smart_chain, .binance_smart_chain_testnet:
+            return ""
+        case .custom:
+            return ""
+        }
+    }
+
     var magicLinkPrefix: URL {
         let urlString = "https://\(magicLinkHost)/"
         return URL(string: urlString)!
