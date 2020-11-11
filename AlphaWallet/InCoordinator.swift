@@ -134,6 +134,8 @@ class InCoordinator: NSObject, Coordinator {
         fetchXMLAssetDefinitions()
         listOfBadTokenScriptFilesChanged(fileNames: assetDefinitionStore.listOfBadTokenScriptFiles + assetDefinitionStore.conflictingTokenScriptFileNames.all)
         setupWatchingTokenScriptFileChangesToFetchEvents()
+
+        Oneinch.fetchSupportedTokens()
     }
 
     func launchUniversalScanner() {
@@ -832,7 +834,28 @@ extension InCoordinator: SettingsCoordinatorDelegate {
 
 extension InCoordinator: TokensCoordinatorDelegate {
 
-    func didPressErc20ExchangeOnUniswap(for holder: UniswapHolder, in coordinator: TokensCoordinator) {
+    func didPressErc20Exchange(for service: ExchangeService, in coordinator: TokensCoordinator) {
+        guard let dappBrowserCoordinator = dappBrowserCoordinator else { return }
+
+        let url: URL? = {
+            switch service {
+            case .uniswap(let service):
+                return service.url
+            case .oneinch(let service):
+                return service.url
+            }
+        }()
+
+        if let url = url {
+            coordinator.navigationController.popViewController(animated: false)
+
+            showTab(.browser)
+
+            dappBrowserCoordinator.open(url: url, animated: true, forceReload: true)
+        }
+    }
+
+    func didPressErc20ExchangeOnUniswap(for holder: Uniswap, in coordinator: TokensCoordinator) {
         guard let dappBrowserCoordinator = dappBrowserCoordinator, let url = holder.url else { return }
 
         coordinator.navigationController.popViewController(animated: false)

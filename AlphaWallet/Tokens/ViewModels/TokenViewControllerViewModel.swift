@@ -40,17 +40,17 @@ struct TokenViewControllerViewModel {
             case .erc721ForTickets:
                 return []
             case .erc20, .nativeCryptocurrency:
+                let actionsByDefault: [TokenInstanceAction] = [
+                    .init(type: .erc20Send),
+                    .init(type: .erc20Receive)
+                ]
+                
                 if UniswapERC20Token.isSupport(token: token) {
-                    return [
-                        .init(type: .erc20Send),
-                        .init(type: .erc20Receive),
-                        .init(type: .erc20ExchangeOnUniswap)
-                    ]
+                    return actionsByDefault + [.init(type: .erc20ExchangeOnUniswap)]
+                } else if Oneinch.isSupport(token: token) {
+                    return actionsByDefault + [.init(type: .erc20ExchangeOn1inch)]
                 } else {
-                    return [
-                        .init(type: .erc20Send),
-                        .init(type: .erc20Receive)
-                    ]
+                    return actionsByDefault
                 }
             }
         } else {
@@ -60,6 +60,8 @@ struct TokenViewControllerViewModel {
             case .erc20:
                 if UniswapERC20Token.isSupport(token: token) {
                     return actionsFromTokenScript + [.init(type: .erc20ExchangeOnUniswap)]
+                } else if Oneinch.isSupport(token: token) {
+                    return actionsFromTokenScript + [.init(type: .erc20ExchangeOn1inch)]
                 } else {
                     return actionsFromTokenScript
                 }
@@ -68,22 +70,24 @@ struct TokenViewControllerViewModel {
                 if let server = xmlHandler.server, server.matches(server: token.server) {
                     if UniswapERC20Token.isSupport(token: token) {
                         return actionsFromTokenScript + [.init(type: .erc20ExchangeOnUniswap)]
+                    } else if Oneinch.isSupport(token: token) {
+                        return actionsFromTokenScript + [.init(type: .erc20ExchangeOn1inch)]
                     } else {
                         return actionsFromTokenScript
                     }
                 } else {
                     //TODO .erc20Send and .erc20Receive names aren't appropriate
+                    let actionsByDefault: [TokenInstanceAction] = [
+                        .init(type: .erc20Send),
+                        .init(type: .erc20Receive)
+                    ]
+
                     if UniswapERC20Token.isSupport(token: token) {
-                        return [
-                            .init(type: .erc20Send),
-                            .init(type: .erc20Receive),
-                            .init(type: .erc20ExchangeOnUniswap)
-                        ]
+                        return actionsByDefault + [.init(type: .erc20ExchangeOnUniswap)]
+                    } else if Oneinch.isSupport(token: token) {
+                        return actionsByDefault + [.init(type: .erc20ExchangeOn1inch)]
                     } else {
-                        return [
-                            .init(type: .erc20Send),
-                            .init(type: .erc20Receive)
-                        ]
+                        return actionsByDefault
                     }
                 }
             }

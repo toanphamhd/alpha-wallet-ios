@@ -10,6 +10,7 @@ enum AlphaWalletService {
     case register(config: Config, device: PushDevice)
     case unregister(config: Config, device: PushDevice)
     case marketplace(config: Config, server: RPCServer)
+    case oneInchTokens(config: Config)
 
     enum SortOrder: String {
         case asc
@@ -28,6 +29,8 @@ extension AlphaWalletService: TargetType {
             return config.priceInfoEndpoints
         case .marketplace(let config, _):
             return config.priceInfoEndpoints
+        case .oneInchTokens(let config):
+            return config.oneInch
         }
     }
 
@@ -48,6 +51,8 @@ extension AlphaWalletService: TargetType {
             return "/api/v3/coins/markets"
         case .marketplace:
             return "/marketplace"
+        case .oneInchTokens:
+            return "/v1.1/tokens"
         }
     }
 
@@ -59,6 +64,7 @@ extension AlphaWalletService: TargetType {
         case .priceOfEth: return .get
         case .priceOfDai: return .get
         case .marketplace: return .get
+        case .oneInchTokens: return .get
         }
     }
 
@@ -102,6 +108,8 @@ extension AlphaWalletService: TargetType {
             ], encoding: URLEncoding())
         case .marketplace(_, let server):
             return .requestParameters(parameters: ["chainID": server.chainID], encoding: URLEncoding())
+        case .oneInchTokens:
+            return .requestPlain
         }
     }
 
@@ -126,6 +134,8 @@ extension AlphaWalletService: TargetType {
                 "client": Bundle.main.bundleIdentifier ?? "",
                 "client-build": Bundle.main.buildNumber ?? "",
             ]
+        case .oneInchTokens:
+            return nil
         }
     }
 }

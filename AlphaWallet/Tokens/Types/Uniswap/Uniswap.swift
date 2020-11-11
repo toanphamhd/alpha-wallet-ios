@@ -1,5 +1,5 @@
 //
-//  UniswapHolder.swift
+//  Uniswap.swift
 //  AlphaWallet
 //
 //  Created by Vladyslav Shepitko on 21.08.2020.
@@ -7,7 +7,12 @@
 
 import UIKit
 
-struct UniswapHolder {
+enum ExchangeService {
+    case uniswap(Uniswap)
+    case oneinch(Oneinch)
+}
+
+struct Uniswap {
     private static let baseURL = "https://app.uniswap.org/#"
 
     let input: Input
@@ -26,7 +31,7 @@ struct UniswapHolder {
         //NOTE: URLComponents doesn't allow path to contain # symbol
         guard let pathWithQueryItems = components.url?.absoluteString else { return nil }
 
-        return URL(string: UniswapHolder.baseURL + pathWithQueryItems)
+        return URL(string: Uniswap.baseURL + pathWithQueryItems)
     }
 
     enum Version: String {
