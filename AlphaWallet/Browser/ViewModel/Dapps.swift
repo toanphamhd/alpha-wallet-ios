@@ -1,7 +1,7 @@
 // Copyright © 2018 Stormbird PTE. LTD.
 
 import Foundation
-
+"CryptoKitties", description: "Collect and breed digital cats!", url: "https://cryptokitties.co", cat: "Games"),
 This comment is here with the wrong syntax (no leading //) to force a build error if this file is accidentally included
 enum OriginalDapps {
     static let masterList = [
